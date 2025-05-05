@@ -16,28 +16,24 @@ con.connect().then(() => console.log("Database Connected succesfully"))
     .catch(() => console.log("Database connection failed"))
 
 
-app.post('/postData', (req, res) => {
+app.post('/postData', async(req, res) => {
+    try{
     const { name, id } = req.body
-
-    con.query(`INSERT INTO demotable(name,id) VALUES ('${name}',${id})`, (err, result) => {
-        if (err) {
-            res.send(err)
-        }
-        else {
-            console.log(result)
-            res.send('Posted Data')
-        }
-    })
-})
-app.get('/fetchData',(req,res)=>{
-    con.query('SELECT * FROM demotable',(error,result) =>{
-        if (error) {
-            res.send("data failed to be fetched")
-        }
-        else{
-            res.send(result.rows)
-        }
-    })
+    const result = await con.query(`INSERT INTO demotable(name,id) VALUES ('${name}',${id})`)
+   return res.status(200).json(result)
+}
+catch(error){
+    res.status(400).json({error:error.message})
+}
+     })
+app.get('/fetchData',async (req,res)=>{
+    try{
+        const result = await con.query(`SELECT * FROM demotable`)
+        res.status(400).json(result.rows)
+    }
+    catch(error){
+        res.status(400).json({error:error.message})
+    }
 })
 
 app.get('/fetchDataById/:id', async(req,res)=>{
