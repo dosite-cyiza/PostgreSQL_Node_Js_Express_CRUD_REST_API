@@ -19,15 +19,23 @@ con.connect().then(() => console.log("Database Connected succesfully"))
 app.post('/postData', (req, res) => {
     const { name, id } = req.body
 
-    const insert_query = 'INSERT INTO demotable(name,id) VALUES($1,$2)'
-
-    con.query(insert_query, [name, id], (err, result) => {
+    con.query(`INSERT INTO demotable(name,id) VALUES ('${name}',${id})`, (err, result) => {
         if (err) {
             res.send(err)
         }
         else {
             console.log(result)
             res.send('Posted Data')
+        }
+    })
+})
+app.get('/fetchData',(req,res)=>{
+    con.query('SELECT * FROM demotable',(error,result) =>{
+        if (error) {
+            res.send("data failed to be fetched")
+        }
+        else{
+            res.send(result.rows)
         }
     })
 })
