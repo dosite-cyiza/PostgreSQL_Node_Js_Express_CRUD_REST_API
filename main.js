@@ -51,6 +51,37 @@ app.get('/fetchDataById/:id', async(req,res)=>{
     }
 })
 
+app.put('/updateData/:id',async(req,res) =>{
+    try {
+        const id = req.params.id
+        const name = req.body.name
+
+         await con.query(`UPDATE demotable SET name ='${name}' WHERE id =${id}`)
+        return res.status(200).json(
+            {
+                name,
+                id
+            }
+        )
+        
+    } catch (error) {
+        return res.status(400).json({error:error.message})
+        
+    }
+})
+
+app.delete('/deleteData/:id',async(req,res) =>{
+    try{
+    const id = req.params.id
+   const result = await con.query(`DELETE FROM demotable WHERE id=${id}`)
+    res.status(200).json(result)
+    }
+    catch(error){
+        res.status(400).json({error:error.message})
+    }
+
+})
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`Server running port ${PORT}`);
