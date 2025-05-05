@@ -40,6 +40,17 @@ app.get('/fetchData',(req,res)=>{
     })
 })
 
+app.get('/fetchDataById/:id', async(req,res)=>{
+    try {
+      const id = req.params.id
+      const result =  await con.query(`SELECT * FROM demotable WHERE id= ${id}`)
+      return res.status(200).json(result.rows)
+    
+    } catch (error) {
+        return res.status(404).json({error: error.message})
+    }
+})
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`Server running port ${PORT}`);
