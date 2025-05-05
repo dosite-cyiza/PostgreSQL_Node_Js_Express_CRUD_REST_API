@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "pg": "^8.15.6"
+  },
+  "name": "postgresql_node_js_express_crud_rest_api",
+  "version": "1.0.0",
+  "description": "This repository contain CRUD with Node Js,Express Js and PostgreSQL .",
+  "main": "main.js",
+  "type":"module",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dosite-cyiza/PostgreSQL_Node_Js_Express_CRUD_REST_API.git"
+  },
+  "author": "Dosite",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dosite-cyiza/PostgreSQL_Node_Js_Express_CRUD_REST_API/issues"
+  },
+  "homepage": "https://github.com/dosite-cyiza/PostgreSQL_Node_Js_Express_CRUD_REST_API#readme"
+}
